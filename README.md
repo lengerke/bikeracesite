@@ -20,3 +20,7 @@ To install Django follow this [guide](https://docs.djangoproject.com/en/5.1/intr
 ```
 python -m pip install Django
 ```
+You also need bootstrap
+```
+python -m pip install django-bootstrap-v5
+```
