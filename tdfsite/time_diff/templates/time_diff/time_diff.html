@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <title>Tour des Friends Demo</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <h1>Tour des Friends Demo</h1>
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="user_name">Name:</label>
+        <input type="text" id="user_name" name="user_name" required>
+
+        <label for="user_time">Ankunftszeit (HH:mm):</label>
+        <input type="text" id="user_time" name="user_time" required>
+        <button type="submit">Save</button>
+    </form>
+
+    {% if time_diff %}
+        <h3>Benötigte Zeit: {{ time_diff }} </h3>
+    {% endif %}
+
+    <h2>Ranking nach Ankunft</h2>
+    <ul>
+        {% for entry in time_entries %}
+            <li>{{ entry.user_name }}: {{ entry.time_difference }} Minuten (Ankunft: {{ entry.user_time }}, Eingabe: {{ entry.timestamp }})</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
